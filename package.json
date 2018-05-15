@@ -1,0 +1,29 @@
+{
+  "name": "hospital-interface-sqlite3-callback",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "node setup.js",
+    "delete-db": "rimraf hospital.db",
+    "reset-db": "npm run delete-db && npm run setup",
+    "reset-sequence": "node reset-sequence.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/super-fox-2018/hospital-interface-sqlite3-callback.git"
+  },
+  "author": "Dwiky Erlangga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/super-fox-2018/hospital-interface-sqlite3-callback/issues"
+  },
+  "homepage": "https://github.com/super-fox-2018/hospital-interface-sqlite3-callback#readme",
+  "dependencies": {
+    "sqlite3": "^4.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
+  }
+}
