@@ -2,7 +2,8 @@ let model = require('./model.js')
 let control = require('./controller.js')
 control = new control()
 model = new model()
-//add Politician + argv[4] + argv[5] + argv[6] + argv[7]
+
+
 let input = process.argv[2]
 let username = process.argv[3]
 let pass = process.argv[4]
@@ -19,14 +20,14 @@ if (input === 'login') {
 
 if (input === 'addPatient') {
   let penyakit = []
-  for (let i = 3; i < process.argv.length; i++) {
+  for (let i = 4; i < process.argv.length; i++) {
     penyakit.push(process.argv[i])
   }
 
-  model.addPatient(process.argv[3], penyakit)
+  control.addpatient(process.argv[3], penyakit)
 
+}
 
-
-
-
+if (input === 'logout') {
+  control.logoutku(username)
 }

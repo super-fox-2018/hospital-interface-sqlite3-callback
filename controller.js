@@ -15,12 +15,26 @@
 
 
     login(username, password) {
-      modelku.Loginku(username, password, function(a) {
-        view.viewLogin(a)
+      modelku.Loginku(username, password, function(b) {
+        view.viewLogin(b)
       })
     }
 
 
+
+    addpatient(username, diagnosis) {
+      modelku.addPatient(username, diagnosis, function(a) {
+        view.addpasien(a)
+      })
+    }
+
+
+
+    logoutku(username) {
+      modelku.Logout(username, function(a) {
+        view.viewlogout(a)
+      })
+    }
 
 
   }

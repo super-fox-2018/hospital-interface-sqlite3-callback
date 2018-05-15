@@ -5,16 +5,35 @@ class Register {
   constructor() {}
 
 
+  //return length of employee
+  longs(cb) {
+    let total = `SELECT count (*) as total FROM employees`
+
+    db.get(total, function(err, data) {
+      if (err) throw err
+      cb(data)
+    });
+  }
 
 
+  //return total patient
+  totalpatient(cb) {
+    let total = `SELECT count (*) as total FROM patient`
+
+    db.get(total, function(err, data) {
+      if (err) throw err
+      cb(data)
+    });
+  }
+
+
+  //register employee
   registerEmployee(username, password, role, cb) {
 
     let daftar = `INSERT INTO employees(username, password, role, islogin)
       VALUES("${username}", "${password}","${role}","false");`
     db.run(daftar, function(err) {
       if (err) throw err;
-
-
       db.all(`select * from employees WHERE username = "${username}"`, function(err, rows) {
         if (err) {
           console.log(err);
@@ -24,14 +43,25 @@ class Register {
     });
   }
 
-
+  //login
   Loginku(username, password, cb) {
-
-
     let query = `SELECT * FROM employees where username = "${username}" and password = "${password}"`
     db.get(query, function(err, data) {
       if (err) throw err
       db.run(`UPDATE employees SET islogin = "true" WHERE username = "${username}" AND password = "${password}"`, function(err) {
+        if (err) throw err;
+        cb(data)
+      });
+    })
+  }
+
+
+  //logout
+  Logout(username, cb) {
+    let query = `SELECT * FROM employees where username = "${username}" and islogin = "true"`
+    db.get(query, function(err, data) {
+      if (err) throw err
+      db.run(`UPDATE employees SET islogin = "false" WHERE username = "${username}"`, function(err) {
         if (err) throw err;
         cb(data)
       });
@@ -41,13 +71,14 @@ class Register {
 
 
 
-  addPatient(username, diagnosis) {
+  // add patient by doctor + desease
+  addPatient(username, diagnosis, cb) {
 
     db.all(`select * from employees WHERE islogin = 'true' AND role = 'dokter'`, function(err, rows) {
       if (err) throw err
       if (rows.length > 0) {
 
-        console.log(username, diagnosis)
+
 
         //INSERT NAMA PASIEN
         let pasien = `INSERT INTO patient(name)
@@ -66,35 +97,23 @@ class Register {
           }
 
 
+          cb(pasien)
+
 
           for (let i = 0; i < diagnosis.length; i++) {
             let daftarsakit = `INSERT INTO diagnose(id_patient, disease) VALUES("${pasien.id}", "${diagnosis[i]}");`
             db.run(daftarsakit, function(err) {
 
               if (err) {
-
                 console.log(err);
-
-
               }
-
-
-
-
             });
 
           }
-
-
         });
 
-
-
-
-
-
       } else {
-        console.log('tidak memiliki akses untuk add passien')
+        //move to view.js
       }
 
     })
