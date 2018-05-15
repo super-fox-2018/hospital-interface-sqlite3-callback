@@ -13,4 +13,6 @@ if(argv[2] === 'register'){
     }
     Controller.patientAdd(argv[3],disease)
   
+}else if(argv[2]=== 'logout'){
+    Controller.outEmployee(argv[3])
 }

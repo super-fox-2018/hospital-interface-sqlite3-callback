@@ -16,15 +16,15 @@ class Controller{
         Employee.loginEmployees(username,password,function(cb){
             View.login(cb)
             
-        })
-           
-       
+        })   
 
     }
 
-    static outEmployee(username,password){
-        Employee.logoutEmployees(username,password)
-        View.logout(username,password)
+    static outEmployee(username){
+        Employee.logoutEmployees(username,function(cb){
+            View.logout(cb)
+        })
+       
     }
 
     static patientAdd(name,diagnosa){

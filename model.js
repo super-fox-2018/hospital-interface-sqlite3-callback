@@ -33,17 +33,17 @@ class Employee{
        
     }
 
-    static logoutEmployees(username,password){
-        let query = `SELECT * FROM employees`
-        db.all(query,function(err,data){
+    static logoutEmployees(username,cb){
+        let query = `SELECT * FROM employees WHERE username = "${username}"`
+        db.get(query,function(err,data){
             if(err) throw err
-            for(let i=0;i<data.length;i++){
-                if(data[i].username == username && data[i].password){
-                    let update = `UPDATE employees SET status = 'false' WHERE id = ${data[i].id}`
-                    db.run()
-                }
-            }
+            let status = `UPDATE employees SET status ='false' WHERE username = "${username}"`
+            db.run(status,function(err){
+                if(err) throw err
+                cb(data)
+            })
         })
+    
     }
 
     static addPatient(name,diagnosa){

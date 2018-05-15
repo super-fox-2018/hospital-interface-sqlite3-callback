@@ -6,6 +6,7 @@ class View{
     regist(data){ 
         console.log(data)
         console.log(`${data[0].username} has succesfully registered`)
+        console.log(`total employee ${data[0].id}`)
     }
     login(username){
         if(!username){
@@ -13,8 +14,8 @@ class View{
         }else{
         console.log(`${username.username} has succesfully logged in`)}
     }
-    logout(username,password){
-        console.log(`${username} has succesfully logged out`)
+    logout(data){
+        console.log(`${data.username} has succesfully logged out`)
     }
     patient(name,diagnosa){
         console.log(`${name}`)
