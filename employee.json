@@ -1,0 +1,30 @@
+[
+  {
+    "name": "budi",
+    "position": "dokter",
+    "username": "budi",
+    "password": "123456",
+    "isLoggedIn": false
+  },
+  {
+    "name": "bambang",
+    "position": "admin",
+    "username": "bambang",
+    "password": "54321",
+    "isLoggedIn": false
+  },
+  {
+    "name": "bob",
+    "position": "receptionist",
+    "username": "bob",
+    "password": "54321asd",
+    "isLoggedIn": false
+  },
+  {
+    "name": "rhesa",
+    "position": "dokter",
+    "username": "rhesa",
+    "password": "erhajet123",
+    "isLoggedIn": false
+  }
+]
