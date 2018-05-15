@@ -43,17 +43,17 @@ class Model {
   }
 
   static addPatient(patientName,diagnosis,callback){
-    database.all(`SELECT position FROM employees where status_login = 1`,(err,employees)=>{
+    database.get(`SELECT position FROM employees where status_login = 1`,(err,employees)=>{
       if(!err){
-        var positionEmployee = employees[0].position;
+        var positionEmployee = employees.position;
         if(positionEmployee=='dokter'){
           database.run(`INSERT INTO patients(name) VALUES ("${patientName}")`,function(err){
             if(err) throw err;
           })
-          database.all(`SELECT id FROM patients where name = "${patientName}"`,(err,patients)=>{
+          database.get(`SELECT id FROM patients where name = "${patientName}"`,(err,patients)=>{
             if(err) throw err;
             else {
-              var id_patient = patients[0].id;
+              var id_patient = patients.id;
               for (var i = 0; i < diagnosis.length; i++) {
                 database.run(`INSERT INTO diagnosis(diagnosa,patients_id) VALUES ("${diagnosis[i]}","${id_patient}")`,function(err){
                   if(err) throw err;
@@ -61,9 +61,9 @@ class Model {
               }
             }
           })
-          database.all(`SELECT COUNT(*) as count FROM patients`,(err,patients)=>{
+          database.get(`SELECT COUNT(*) as count FROM patients`,(err,patients)=>{
             if(!err){
-              var countPatient = patients[0].count;
+              var countPatient = patients.count;
               callback(false,countPatient);
             }
             else {
