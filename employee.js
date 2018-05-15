@@ -27,6 +27,7 @@ class Employee {
 
   static checkLoggedInEmployee(callback){
     database.get(`SELECT * FROM employees WHERE login_status = 1`,(err,loggedInEmployee)=>{
+      if(loggedInEmployee === undefined) return callback(false);
       return callback(loggedInEmployee.position,loggedInEmployee.id)
     })
   }
